@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import {Image, Text, View} from 'react-native';
-import React from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useRef} from 'react';
 import colors from '../../config/ThemeColors';
 import {useTheme} from '../../context/ThemeContext';
 import Carousel from 'pinar';
@@ -13,83 +13,72 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 const Welcome = () => {
   const {isDarkMode} = useTheme();
+  const carouselRef = useRef(null);
 
   const themeColors = isDarkMode ? colors.dark : colors.light;
-  const styles = {
-    slide1: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#a3c9a8',
-    },
-    slide2: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#84b59f',
-    },
-    slide3: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#69a297',
-    },
-    text: {
-      color: '#1f2d3d',
-      opacity: 0.7,
-      fontSize: 48,
-      fontWeight: 'bold',
-    },
-  };
 
   const carouselItems = [
     {
       title: 'Item 1',
-    //   img: require('../../assets/images/providerone.png'),
+      img: require('../../assets/images/providerone.png'),
 
       text: 'We Provide Professional Home services at a very friendly price',
     },
     {
       title: 'Item 2',
-    //   img: require('../../assets/images/providertwo.png'),
+      img: require('../../assets/images/providertwo.png'),
       text: 'Easy Service booking & Scheduling',
     },
     {
       title: 'Item 3',
-    //   img: require('../../assets/images/providerthree.png'),
+      img: require('../../assets/images/providerthree.png'),
       text: 'Get Beauty parlor at your home & other Personal Grooming needs',
     },
     {
       title: 'Item 4',
-    //   img: require('../../assets/images/providerfour.png'),
+      img: require('../../assets/images/providerfour.png'),
       text: 'Get your Home cleaned by professionals',
     },
   ];
+  const handleNext = () => {
+    carouselRef.current.scrollToNext();
+  };
 
   return (
     <View className="flex-1 bg-white pt-10 px-3">
       <View className="flex-row justify-end">
         <Text
-          className=" text-right p-2 text-white px-4"
+          className=" text-right p-2 text-[#283891] px-4 bg-[#E6EAFF]"
           style={{
-            backgroundColor: themeColors.primary,
+            // backgroundColor: themeColors.primary,
             borderRadius: 10,
           }}>
           Skip
         </Text>
       </View>
-      <View className="h-[60vh] pt-5">
-        <Carousel>
+      <View style={{height: '70%', paddingTop: 5}}>
+        <Carousel
+          ref={carouselRef}
+          activeDotStyle={{
+            backgroundColor: themeColors.primary,
+            width: 20,
+            height: 8,
+            borderRadius: 5,
+          }}
+          showsControls={false}>
           {carouselItems.map((item, index) => (
-            <View key={index}>
-              {/* <Image source={item.img} style={styles.image} /> */}
-              <Text style={styles.text}>{item.text}</Text>
+            <View key={index} style={styles.slide}>
+              <Image source={item.img} style={styles.image} />
+              <View>
+                <Text style={styles.text}>{item.text}</Text>
+              </View>
             </View>
           ))}
         </Carousel>
       </View>
-      <View className="flex-row  justify-center items-center mt-20">
-        <View
+      <View className="flex-row justify-center items-center mt-10">
+        <TouchableOpacity
+          onPress={handleNext}
           className="p-4"
           style={{
             backgroundColor: themeColors.primary,
@@ -98,7 +87,7 @@ const Welcome = () => {
           <Text>
             <Icon name="right" size={30} color="white" />
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -106,4 +95,29 @@ const Welcome = () => {
 
 export default Welcome;
 
-// const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  slide: {
+    flex: 1,
+    // justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: '#a3c9a8',
+    paddingHorizontal: 15,
+  },
+  image: {
+    marginTop: 30,
+    width: 300,
+    height: 300,
+    borderRadius: 200,
+    borderWidth: 15,
+    borderColor: '#F2F4FF',
+    marginBottom: 40, // Add this line
+  },
+  text: {
+    fontFamily: 'SF Pro Display',
+    fontSize: 28,
+    fontWeight: '700',
+    lineHeight: 40,
+    textAlign: 'center',
+    color: '#1A1D1F',
+  },
+});
