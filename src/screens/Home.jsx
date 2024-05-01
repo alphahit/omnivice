@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React from 'react';
@@ -54,7 +55,8 @@ const Home = () => {
   );
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar setBackgroundColor={themeColors.primaryColor} barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      
       <View
         style={[backgroundStyleWithoutFlex, {flexDirection: 'row', justifyContent: 'space-between'}]}>
         <Text style={textStyle}>Toggle Theme</Text>
@@ -65,21 +67,7 @@ const Home = () => {
         />
        
       </View>
-      <Text className="mt-2 text-lg text-pink-500">
-          Test Tailwind : Color Pink Working
-        </Text>
-      <View style={backgroundStyle}>
-        <TouchableOpacity onPress={() => dispatch(setColor())}>
-          <Text style={{fontSize: 20, color: themeColors.text}}>
-            Generate Random Color
-          </Text>
-        </TouchableOpacity>
-        <FlatList
-          data={colorList}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
+      
       <Button
         title="Navigate To Settings"
         onPress={() => navigation.navigate('Settings')}
