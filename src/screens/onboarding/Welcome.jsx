@@ -1,11 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import {Text, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import React from 'react';
 import colors from '../../config/ThemeColors';
 import {useTheme} from '../../context/ThemeContext';
 import Carousel from 'pinar';
 import Icon from 'react-native-vector-icons/AntDesign';
+// import c1 from '../../assets/images/providerone.png';
+// import c2 from '../../assets/images/providertwo.png';
+// import c3 from '../../assets/images/providerthree.png';
+// import c4 from '../../assets/images/providerfour.png';
 
 const Welcome = () => {
   const {isDarkMode} = useTheme();
@@ -41,16 +45,24 @@ const Welcome = () => {
   const carouselItems = [
     {
       title: 'Item 1',
-      
+    //   img: require('../../assets/images/providerone.png'),
+
       text: 'We Provide Professional Home services at a very friendly price',
     },
     {
       title: 'Item 2',
+    //   img: require('../../assets/images/providertwo.png'),
       text: 'Easy Service booking & Scheduling',
     },
     {
       title: 'Item 3',
+    //   img: require('../../assets/images/providerthree.png'),
       text: 'Get Beauty parlor at your home & other Personal Grooming needs',
+    },
+    {
+      title: 'Item 4',
+    //   img: require('../../assets/images/providerfour.png'),
+      text: 'Get your Home cleaned by professionals',
     },
   ];
 
@@ -68,15 +80,12 @@ const Welcome = () => {
       </View>
       <View className="h-[60vh] pt-5">
         <Carousel>
-          <View style={styles.slide1}>
-            <Text style={styles.text}>1</Text>
-          </View>
-          <View style={styles.slide2}>
-            <Text style={styles.text}>2</Text>
-          </View>
-          <View style={styles.slide3}>
-            <Text style={styles.text}>3</Text>
-          </View>
+          {carouselItems.map((item, index) => (
+            <View key={index}>
+              {/* <Image source={item.img} style={styles.image} /> */}
+              <Text style={styles.text}>{item.text}</Text>
+            </View>
+          ))}
         </Carousel>
       </View>
       <View className="flex-row  justify-center items-center mt-20">

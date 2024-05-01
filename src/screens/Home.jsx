@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
@@ -13,7 +14,13 @@ import {
   StyleSheet,
   TextInput,
   Keyboard,
+  Pressable,
+  Image,
 } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 import {useTheme} from '../context/ThemeContext';
 import colors from '../config/ThemeColors';
 import {useNavigation} from '@react-navigation/native';
@@ -24,15 +31,15 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 const Home = () => {
   const {isDarkMode, setTheme} = useTheme();
   const localServices = [
-    {id: 'b2b', name: 'B2B'},
-    {id: 'doctors', name: 'Doctors'},
-    {id: 'travel', name: 'Travel'},
-    {id: 'education', name: 'Education'},
-    {id: 'consultants', name: 'Consultants'},
-    {id: 'rentHire', name: 'Rent & Hire'},
-    {id: 'interiors', name: 'Interiors Designers'},
-    {id: 'packersMovers', name: 'Packers & Movers'},
-    {id: 'repairsServices', name: 'Repairs & Services'},
+    {id: 'b2b', name: 'B2B', color: '#26A69A'}, // Lighter teal
+    {id: 'doctors', name: 'Doctors', color: '#4DB6AC'}, // Soft teal
+    {id: 'travel', name: 'Travel', color: '#80CBC4'}, // Greenish teal
+    {id: 'education', name: 'Education', color: '#B2DFDB'}, // Pale teal
+    {id: 'consultants', name: 'Consultants', color: '#E0F2F1'}, // Very pale teal
+    {id: 'rentHire', name: 'Rent & Hire', color: '#00897B'}, // Dark teal
+    {id: 'interiors', name: 'Interiors Designers', color: '#00695C'}, // Deeper teal
+    {id: 'packersMovers', name: 'Packers & Movers', color: '#004D40'}, // Darkest teal
+    {id: 'repairsServices', name: 'Repairs & Services', color: '#00796B'}, // Mid teal
   ];
 
   const [term, setTerm] = useState('');
@@ -61,6 +68,37 @@ const Home = () => {
       marginTop: -30,
       marginHorizontal: 20,
     },
+    featuredProvidersContainer: {
+      paddingHorizontal: 20,
+      paddingTop: 10, // Adjust as needed
+      paddingBottom: 20, // Provides spacing after the section
+    },
+    featuredProvidersTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: themeColors.text,
+      marginBottom: 15, // Space between title and image
+    },
+    featuredProvidersPressable: {
+      height: wp('50%'), // Responsive width and height
+      width: wp('50%'),
+      backgroundColor: themeColors.teal900,
+      justifyContent: 'center', // Centers the image vertically
+      alignItems: 'center', // Centers the image horizontally
+      borderRadius: 10, // Optional: rounds corners
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    featuredProviderImage: {
+      width: '100%', // Ensures the image covers the pressable area
+      height: '100%',
+    },
   });
   // const backgroundStyleWithoutFlex = {
   //   backgroundColor: themeColors.background,
@@ -87,13 +125,29 @@ const Home = () => {
   //     <Text style={{color: themeColors.text, fontSize: 16}}>{item}</Text>
   //   </View>
   // );
+  const renderService = ({item}) => {
+    return (
+      <View
+        className="align-center justify-center"
+        style={{
+          width: wp(22),
+          height: wp(22),
+          backgroundColor: item.color,
+          padding: 5,
+          margin: 10,
+          borderRadius: 10,
+        }}>
+        <Text style={{color: 'white', fontSize: 12}}>{item.name}</Text>
+      </View>
+    );
+  };
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         setBackgroundColor={themeColors.primaryColor}
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
       />
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{flex: 1, backgroundColor: themeColors.background}}>
         <View
           style={{
             height: 120,
@@ -163,13 +217,55 @@ const Home = () => {
             onSubmitEditing={Keyboard.dismiss}
           />
         </View>
+        <View style={{alignItems: 'center'}}>
+          <FlatList
+            numColumns={3}
+            renderItem={renderService}
+            data={localServices}
+            keyExtractor={item => item.id}
+          />
+        </View>
+        <View style={dynamicStyles.featuredProvidersContainer}>
+  <Text style={dynamicStyles.featuredProvidersTitle}>
+    Featured Providers
+  </Text>
+  <Pressable style={dynamicStyles.featuredProvidersPressable}>
+    <Image
+      style={dynamicStyles.featuredProviderImage}
+      source={require('../assets/images/providerone.png')}
+      resizeMode="cover"
+    />
+  </Pressable>
+  <Pressable style={dynamicStyles.featuredProvidersPressable}>
+    <Image
+      style={dynamicStyles.featuredProviderImage}
+      source={require('../assets/images/providertwo.png')}
+      resizeMode="cover"
+    />
+  </Pressable>
+  <Pressable style={dynamicStyles.featuredProvidersPressable}>
+    <Image
+      style={dynamicStyles.featuredProviderImage}
+      source={require('../assets/images/providerthree.png')}
+      resizeMode="cover"
+    />
+  </Pressable>
+  <Pressable style={dynamicStyles.featuredProvidersPressable}>
+    <Image
+      style={dynamicStyles.featuredProviderImage}
+      source={require('../assets/images/providerfour.png')}
+      resizeMode="cover"
+    />
+  </Pressable>
+</View>
       </View>
 
-      <Button
+      {/* <Button
         title="Navigate To Settings"
         onPress={() => navigation.navigate('Settings')}
         color={isDarkMode ? themeColors.primary : themeColors.secondary}
-      />
+      /> */}
+
       {/* <View
         style={[backgroundStyleWithoutFlex, {flexDirection: 'row', justifyContent: 'space-between'}]}>
         <Text style={textStyle}>Toggle Theme</Text>

@@ -19,6 +19,7 @@ const colors = {
     springGreen: '#00FF7F',
     mediumTurquoise: '#48D1CC',
     cyanProcess: '#00B7EB',
+    teal900: '#004D40',
   },
   dark: {
     background: '#333333',
@@ -38,6 +39,7 @@ const colors = {
     darkTurquoise: '#00CED1',
     seaGreen: '#2E8B57',
     viridian: '#40826D',
+    tealA100: '#A7FFEB',
   },
 };
 
