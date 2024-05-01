@@ -1,4 +1,4 @@
-package com.rn_rdx_saga
+package com.omnivice
 
 import android.app.Application
 import com.facebook.react.PackageList

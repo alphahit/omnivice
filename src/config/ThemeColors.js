@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable prettier/prettier */
 const colors = {
   light: {
@@ -7,6 +8,7 @@ const colors = {
     secondary: '#FF6347',
     highlight: '#87CEEB',
     shadow: '#F5F5F5',
+    primaryColor: '#0BCA93'
   },
   dark: {
     background: '#333333',
@@ -15,6 +17,7 @@ const colors = {
     secondary: '#FF6347',
     highlight: '#81b0ff',
     shadow: '#222222',
+    primaryColor: '#0BCA93'
   },
 };
 

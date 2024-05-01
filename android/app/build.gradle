@@ -74,9 +74,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.rn_rdx_saga"
+    namespace "com.omnivice"
     defaultConfig {
-        applicationId "com.rn_rdx_saga"
+        applicationId "com.omnivice"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

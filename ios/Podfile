@@ -14,7 +14,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'rn_rdx_saga' do
+target 'omnivice' do
   config = use_native_modules!
 
   use_react_native!(
@@ -23,7 +23,7 @@ target 'rn_rdx_saga' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'rn_rdx_sagaTests' do
+  target 'omniviceTests' do
     inherit! :complete
     # Pods for testing
   end
