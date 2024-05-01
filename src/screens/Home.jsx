@@ -41,7 +41,37 @@ const Home = () => {
     {id: 'packersMovers', name: 'Packers & Movers', color: '#004D40'}, // Darkest teal
     {id: 'repairsServices', name: 'Repairs & Services', color: '#00796B'}, // Mid teal
   ];
-
+  const featuredProviders = [
+    {
+      id: 'provider1',
+      image: require('../assets/images/providerone.png'),
+      name: 'Pedicure',
+      originalPrice: '599',
+      discountedPrice: '499',
+    },
+    {
+      id: 'provider2',
+      image: require('../assets/images/providertwo.png'),
+      name: 'Hair Salon',
+      originalPrice: '₹799',
+      discountedPrice: '699',
+    },
+    {
+      id: 'provider3',
+      image: require('../assets/images/providerthree.png'),
+      name: 'Massage Therapy',
+      originalPrice: '899',
+      discountedPrice: '799',
+    },
+    {
+      id: 'provider4',
+      image: require('../assets/images/providerfour.png'),
+      name: 'Facial Treatment',
+      originalPrice: '999',
+      discountedPrice: '899',
+    },
+  ];
+  
   const [term, setTerm] = useState('');
   const navigation = useNavigation();
 
@@ -80,13 +110,15 @@ const Home = () => {
       marginBottom: 15, // Space between title and image
     },
     featuredProvidersPressable: {
-      height: wp('50%'), // Responsive width and height
-      width: wp('50%'),
+      flex: 1,
+      margin: 10,
+      height: wp('50%'),
       backgroundColor: themeColors.teal900,
-      justifyContent: 'center', // Centers the image vertically
-      alignItems: 'center', // Centers the image horizontally
-      borderRadius: 10, // Optional: rounds corners
-      shadowColor: '#000',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 10,
+      padding: 10,
+      shadowColor: themeColors.text,
       shadowOffset: {
         width: 0,
         height: 2,
@@ -96,8 +128,9 @@ const Home = () => {
       elevation: 5,
     },
     featuredProviderImage: {
-      width: '100%', // Ensures the image covers the pressable area
-      height: '100%',
+      borderRadius: 10,
+      width: wp(30),
+      height: wp(30), // Adjust according to your design
     },
   });
   // const backgroundStyleWithoutFlex = {
@@ -141,6 +174,28 @@ const Home = () => {
       </View>
     );
   };
+  const renderProvider = ({ item }) => (
+    <Pressable style={dynamicStyles.featuredProvidersPressable}>
+      <Image
+        style={dynamicStyles.featuredProviderImage}
+        source={item.image}
+        resizeMode="cover"
+      />
+      <View>
+      <Text style={{ fontWeight: 'bold', fontSize: 16, color: 'white' }}>{item.name}</Text>
+      <Text
+        style={{
+          textDecorationLine: 'line-through',
+          textDecorationStyle: 'solid',
+          color: 'gray',
+          fontSize: 14,
+        }}>
+        ₹{item.originalPrice}
+      </Text>
+      <Text style={{ fontWeight: 'bold', color: 'white', fontSize: 16 }}>₹{item.discountedPrice}</Text>
+      </View>
+    </Pressable>
+  );
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -229,34 +284,13 @@ const Home = () => {
   <Text style={dynamicStyles.featuredProvidersTitle}>
     Featured Providers
   </Text>
-  <Pressable style={dynamicStyles.featuredProvidersPressable}>
-    <Image
-      style={dynamicStyles.featuredProviderImage}
-      source={require('../assets/images/providerone.png')}
-      resizeMode="cover"
-    />
-  </Pressable>
-  <Pressable style={dynamicStyles.featuredProvidersPressable}>
-    <Image
-      style={dynamicStyles.featuredProviderImage}
-      source={require('../assets/images/providertwo.png')}
-      resizeMode="cover"
-    />
-  </Pressable>
-  <Pressable style={dynamicStyles.featuredProvidersPressable}>
-    <Image
-      style={dynamicStyles.featuredProviderImage}
-      source={require('../assets/images/providerthree.png')}
-      resizeMode="cover"
-    />
-  </Pressable>
-  <Pressable style={dynamicStyles.featuredProvidersPressable}>
-    <Image
-      style={dynamicStyles.featuredProviderImage}
-      source={require('../assets/images/providerfour.png')}
-      resizeMode="cover"
-    />
-  </Pressable>
+  <FlatList
+    data={featuredProviders}
+    renderItem={renderProvider}
+    keyExtractor={item => item.id}
+    horizontal={true}
+    contentContainerStyle={{ paddingBottom: 20 }}
+  />
 </View>
       </View>
 
