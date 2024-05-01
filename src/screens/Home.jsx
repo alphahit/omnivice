@@ -1,7 +1,7 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -23,6 +23,18 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 const Home = () => {
   const {isDarkMode, setTheme} = useTheme();
+  const localServices = [
+    {id: 'b2b', name: 'B2B'},
+    {id: 'doctors', name: 'Doctors'},
+    {id: 'travel', name: 'Travel'},
+    {id: 'education', name: 'Education'},
+    {id: 'consultants', name: 'Consultants'},
+    {id: 'rentHire', name: 'Rent & Hire'},
+    {id: 'interiors', name: 'Interiors Designers'},
+    {id: 'packersMovers', name: 'Packers & Movers'},
+    {id: 'repairsServices', name: 'Repairs & Services'},
+  ];
+
   const [term, setTerm] = useState('');
   const navigation = useNavigation();
 
@@ -77,17 +89,43 @@ const Home = () => {
   // );
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar setBackgroundColor={themeColors.primaryColor} barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View style={{flex:1, backgroundColor: 'white'}}>
-          <View className='' style={{ height: 100, backgroundColor:themeColors.primaryColor, borderBottomStartRadius: 25, borderBottomEndRadius: 25 }}> 
-          <Text>
-              Hi Prateek!
-            </Text>
-            <Text>
-               Find Your Service
-            </Text>
-          </View>
-          <View style={dynamicStyles.v2}>
+      <StatusBar
+        setBackgroundColor={themeColors.primaryColor}
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+      />
+      <View style={{flex: 1, backgroundColor: 'white'}}>
+        <View
+          style={{
+            height: 120,
+            backgroundColor: themeColors.primaryColor,
+            borderBottomStartRadius: 25,
+            borderBottomEndRadius: 25,
+            shadowColor: '#000',
+            shadowOffset: {width: 0, height: 2},
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+            padding: 20,
+          }}>
+          <Text
+            style={{
+              fontSize: 24,
+              fontWeight: 'bold',
+              color: themeColors.text,
+              marginBottom: 5,
+            }}>
+            Hi Prateek!
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              color: themeColors.text,
+              opacity: 0.8,
+            }}>
+            Find Your Service
+          </Text>
+        </View>
+        <View style={dynamicStyles.v2}>
           <TouchableOpacity
             onPress={() => {
               term.length > 0 && handleSearchclose();
@@ -126,15 +164,13 @@ const Home = () => {
           />
         </View>
       </View>
-      
-   
-      
+
       <Button
         title="Navigate To Settings"
         onPress={() => navigation.navigate('Settings')}
         color={isDarkMode ? themeColors.primary : themeColors.secondary}
       />
-         {/* <View
+      {/* <View
         style={[backgroundStyleWithoutFlex, {flexDirection: 'row', justifyContent: 'space-between'}]}>
         <Text style={textStyle}>Toggle Theme</Text>
         <Button
